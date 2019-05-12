@@ -1,0 +1,36 @@
+
+
+.navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
+    color: #fff;
+    background-color: #337ab7;
+    list-style: none;
+    display: flex  !important;
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+   
+}
+
+.backstretch {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 100% 100%;
+    display: flex;
+    width: 100%;
+    background-attachment: fixed!important;
+}
+
+.navigate-header { 
+    background-color:rgba(0, 0, 0, 0.88);
+    color: #fff;
+    transition: all 1s;
+    z-index: 999;
+}
+
+.login {
+    border: 1px solid #fff;
+    padding: 4px;
+}
