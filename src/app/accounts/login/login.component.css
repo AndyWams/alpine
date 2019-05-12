@@ -83,7 +83,7 @@
 @media screen and (max-width: 36rem){
 
     .covering {
-        margin: 0px 50px auto;
+        margin: 0px 18px auto;
     }
   
     .login-wrapper {
@@ -92,10 +92,10 @@
     }  
     
     .login-wrapper .header-top {
-        padding-top: 200px;
+        padding-top: 100px;
         width: 100%;
-        padding-left: 12px;
-        padding-right: 12px;
+        padding-left: 0px;
+        padding-right: 0px;
     }
 
     
