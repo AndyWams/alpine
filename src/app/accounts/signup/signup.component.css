@@ -92,7 +92,7 @@
 @media screen and (max-width: 36rem){
 
     .covering {
-        margin: 0px 50px auto;
+        margin: 0px 18px auto;
     }
   
     .create-wrapper {
@@ -101,7 +101,7 @@
     }  
     
     .create-wrapper .header-top {
-        padding-top: 200px;
+        padding-top: 100px;
         width: 100%;
         padding-left: 12px;
         padding-right: 12px;
@@ -115,15 +115,9 @@
 
     .create-wrapper{
         text-align: center;
-        margin: 50px auto;
+        margin: 0px auto;
     }
 
-    .create-wrapper .header-top  {
-        padding-top: 200px;
-        width: 100%;
-        padding-left: 12px;
-        padding-right: 12px;
-    }
 }
 
 
