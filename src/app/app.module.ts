@@ -11,6 +11,7 @@ import { AppRoutes } from './app.routing';
 import { PageContentComponent } from './core/page-content/page-content.component';
 import { LoginComponent } from './accounts/login/login.component';
 import { SignupComponent } from './accounts/signup/signup.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { SignupComponent } from './accounts/signup/signup.component';
     FooterComponent,
     PageContentComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
