@@ -121,6 +121,18 @@
         font-weight: bold;
         font-size: 1.3rem;
     }
+
+    .go-up {
+        display: block;
+        position: fixed;
+        bottom: 33px;
+        right: 0;
+        z-index: 998;
+        cursor: pointer;
+        font-size: 40px;
+        margin-right: 3px;
+        color: #fff;
+    }
 }
 
 @media (min-width: 992px) {
