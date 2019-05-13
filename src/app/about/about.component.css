@@ -20,6 +20,18 @@ p {
     font-family: 'Quicksand', sans-serif;
 }
 
+.draw-one {
+    animation-delay: 1s;
+}
+
+.draw-two {
+    animation-delay: 2s;
+}
+
+.draw-three {
+    animation-delay: 3s;
+}
+
 @media screen and (min-width: 25rem) {
  .profile-main-banner{
         max-width: 1000px;

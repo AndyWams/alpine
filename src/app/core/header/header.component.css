@@ -30,6 +30,11 @@
     z-index: 999;
 }
 
+.navigate-header.compressed { 
+    background-color: #162737;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+} 
+
 .login {
     border: 1px solid #fff;
     padding: 4px;
