@@ -14,11 +14,11 @@ export const AppRoutes: Routes = [
             component: BannerComponent
         },
         {
-            path: 'login',
+            path: 'accounts/login',
             component: LoginComponent
         },
         {
-            path: 'signup',
+            path: 'accounts/signup',
             component: SignupComponent
         }
         ]
