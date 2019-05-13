@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { BannerComponent } from './banner/banner.component';
 import { HeaderComponent } from './core/header/header.component';
 import { FooterComponent } from './core/footer/footer.component';
-// import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
+import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { AppRoutes } from './app.routing';
 import { PageContentComponent } from './core/page-content/page-content.component';
 import { LoginComponent } from './accounts/login/login.component';
@@ -27,7 +27,7 @@ import { AboutComponent } from './about/about.component';
   imports: [
     BrowserModule,
     RouterModule.forRoot(AppRoutes),
-    // LoadingBarRouterModule,
+    LoadingBarRouterModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
