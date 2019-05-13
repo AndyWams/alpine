@@ -11,7 +11,7 @@ export class ServicesComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    $(document).on('scroll', function () {
+    $(document).on('scroll',  () => {
 
 
       if ($(document).scrollTop() >= 828) {

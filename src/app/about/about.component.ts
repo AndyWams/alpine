@@ -11,7 +11,7 @@ export class AboutComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    $(document).on('scroll', function () {
+    $(document).on('scroll',  () => {
     if ($(document).scrollTop() >= 117) {
 
       $('.step-one').addClass('animated fadeInLeft');

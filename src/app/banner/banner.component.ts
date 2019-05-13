@@ -11,8 +11,8 @@ export class BannerComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    $(document).ready(function () {
-      $('.go-up').on('click', function () {
+    $(document).ready( () => {
+      $('.go-up').on('click',  () => {
         $('html, body').animate({
           scrollTop: $('.main-content').offset().top
         }, 1000);
