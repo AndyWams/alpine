@@ -1,0 +1,171 @@
+.backstretch-services {
+    background-color: #fafafa;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 100% 100%;
+    display: flex;
+    width: 100%;
+    color: #fff;
+    background-attachment: fixed!important;
+}
+
+.service-overlay {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.87);
+}
+
+p {
+    line-height: 1.9em;
+    display: block;
+    word-spacing: 3px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+h2.profile-title {
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 1.4;
+    margin-bottom: 15px;
+    text-align: center;
+    letter-spacing: .20454545em;
+    text-transform: uppercase;
+}
+
+h4.d-flex {
+    font-size: 1.25rem;
+    color: #00b6ff;
+    padding-top: 12px;
+}
+
+p.d-lg-flex {
+    word-spacing: 5px;
+    font-size: 14px;
+    padding: 5px 0px;
+}
+
+p.sub-post-title {
+    text-align: center;  
+    font-size: 14px;
+}
+
+.services-icon {
+    margin-right: 20px;
+    width: 120px;
+    height: 120px;
+}
+
+.services-stage {
+    margin-bottom: 10px;
+}
+
+@media all and (max-width: 24.9375rem) {
+    .backstretch-services {
+        width: 100%;
+        background-position: 100% 100%;
+        background: url(src\assets\bg-img\cityview.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .sect-1 { 
+        margin: 0 auto;
+        padding-top: 70px;
+        padding-bottom: 50px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+
+@media screen and (min-width: 25rem){
+    .backstretch-services {
+        width: 100%;
+        background-position: 100% 100%;
+        background: url(src\assets\bg-img\cityview.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .sect-1 { 
+        margin: 0 auto;
+        padding-top: 70px;
+        padding-bottom: 50px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+
+@media (min-width: 576px) {
+
+    .backstretch-services {
+        background-position: 100% 40%;
+        background: url(src\assets\bg-img\cityview.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+}
+
+@media (min-width: 768px)  {
+
+    .backstretch-services {
+        background-position: 100% 40%;
+        background: url(src\assets\bg-img\cityview.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .sect-1 { 
+        margin: 0 auto;
+        padding-top: 70px;
+        padding-bottom: 50px;
+        margin-left: 78px;
+        margin-right: 78px;
+    }
+}
+
+@media (min-width: 992px) {
+
+    .backstretch-services {
+        background: url(src\assets\bg-img\cityview.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: 100% 40%;
+    }
+
+    .sect-1 { 
+        margin: 0 auto;
+        padding-top: 70px;
+        padding-bottom: 50px;
+        margin-left: 78px;
+        margin-right: 78px;
+    }
+
+    .our-services {
+        margin: 0 auto;
+        padding-left: 50px;
+        padding-right: 50px;
+        text-align: center;
+    }
+
+    .our-services::before {
+        content: '';
+        border-left: 16px solid transparent;
+        border-right: 16px solid transparent;
+        border-top: 30px solid #00b6ff;
+        animation: float infinite;
+        animation-duration: 1s;
+        animation-direction: alternate;
+        position: relative;
+    }
+}
+
+@media  all  and (min-width: 1200px) {
+    .sect-1 { 
+        margin: 0 auto;
+        padding-top: 70px;
+        padding-bottom: 50px;
+        margin-left: 78px;
+        margin-right: 78px;
+    }
+}
