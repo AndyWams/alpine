@@ -1,0 +1,107 @@
+
+.portfolio {
+    background-color: #fff;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 100% 100%;
+    display: flex;
+    width: 100%;
+    color: #000;
+    background-attachment: fixed!important;
+}
+
+.sect-2 { 
+        margin: 0 auto;
+        padding-top: 70px;
+        padding-left: 50px; 
+        padding-right: 50px; 
+        padding-bottom: 50px;
+        text-align: center;
+}
+
+
+h2.profile-title {
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 1.4;
+    margin-bottom: 15px;
+    text-align: center;
+    letter-spacing: .20454545em;
+    text-transform: uppercase;
+}
+
+@media screen and (min-width: 25rem){
+
+     .container {
+        width: 300px;
+    }
+
+    .camera_caption p {
+        font-size: 10px;
+        padding: 1px 4px;
+        text-align: left;
+    }
+}
+
+@media (min-width: 576px) {
+
+     .container {
+        width: 459px;
+    }
+
+    .camera_caption p {
+        font-size: 12px;
+        padding: 1px 4px;
+        text-align: left;
+    } 
+}
+
+@media (min-width: 768px)  {
+
+    .container {
+        width: 650px;
+    }
+
+    .camera_caption p {
+        font-size: 14px;
+        padding: 1px 4px;
+        text-align: left;
+    } 
+}
+@media (min-width: 992px) {
+   .container {
+        width: 873px;
+    }
+
+    .camera_caption p {
+        font-size: 14px;
+        padding: 1px 4px;
+        text-align: left;
+    }   
+
+   .sect-2::before {
+        content: '';
+        border-left: 16px solid transparent;
+        border-right: 16px solid transparent;
+        border-top: 30px solid #00b6ff;
+        animation: float infinite;
+        animation-duration: 1s;
+        animation-direction: alternate;
+        position: relative;
+    }
+}
+
+@media  all  and (min-width: 1200px) {
+ 
+    .container {
+        width: 1080px;
+    }
+
+    .camera_caption p {
+        font-size: 14px;
+    
+        padding: 1px 8px;
+        text-align: left;
+    }
+}
+    
