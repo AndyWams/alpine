@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-portfolio',
@@ -19,10 +20,18 @@ export class PortfolioComponent implements OnInit {
     body.appendChild(script);
   }
   ngOnInit() {
-    this.loadScript('../assets/js/jquery-3.4.1.min.js');
-    this.loadScript('../assets/js/plugins.js');
-    this.loadScript('../assets/js/camera.min.js');
-    this.loadScript('../assets/js/easing.min.js');
-  }
+    this.loadScript('assets/js/jquery-3.4.1.min.js');
+    this.loadScript('assets/js/plugins.js');
+    this.loadScript('assets/js/easing.min.js');
+    this.loadScript('assets/js/camera.min.js');
 
+    $(document).on('scroll', () => {
+      if ($(document).scrollTop() >= 1690) {
+        $('.step-three').addClass('animated zoomIn');
+      } else {
+        $('.step-three').removeClass('animated zoomIn');
+      }
+      });
+
+  }
 }
