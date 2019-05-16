@@ -302,6 +302,9 @@ MIT
 @ngx-loading-bar/core
 MIT
 
+@angular/forms
+MIT
+
 @ngx-loading-bar/router
 MIT
 
