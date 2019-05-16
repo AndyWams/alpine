@@ -1,6 +1,14 @@
 
 
+.form-control {
+    box-shadow: none;
+    padding: 0px;
+    border-radius: 0px;
+}
 
+.form-control.is-invalid:focus {
+    box-shadow: none;
+}
 .create-wrapper .header-top h1 {
     color: #00000091;
     font-family: 'Quicksand', sans-serif;
@@ -38,7 +46,8 @@
 
 .account-form .label {
 	position: absolute;
-	left: 15px;
+    left: 15px;
+    top: -22px;
 	bottom:11px;
 	color: #888;
 	cursor: text;
@@ -46,7 +55,7 @@
 }
 
 .account-form .input-text:focus + .label {
-	transform: translateY(-18px);
+	transform: translateY(-6px);
 	font-size: 12px;
     color: #35a8e0;
     transition:  .2s ease-in-out;
