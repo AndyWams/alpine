@@ -11,7 +11,7 @@ import { throwError } from 'rxjs';
 export class UserServiceService {
 
   constructor(private _http: HttpClient) { }
-url = 'http://localhost:4000';
+url = 'http://localhost:3000';
 
   getUsers() {
     return this._http.get(`${this.url}/users`);
