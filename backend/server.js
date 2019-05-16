@@ -73,11 +73,6 @@ router.route('/users/add').post((req, res) => {
             .send(req.err);
     }
     else {
-        Users.find({ email: req.body.email }).then(result => {
-            if (result.length > 1) {
-                return res.status(422).send("User ALready Exist")
-            }
-        });
         let newUser = new Users({
             username: username,
             email: email,
@@ -129,4 +124,11 @@ router.route('/users/update/:id').post((req, res) => {
 
 router.route('/users/delete/:id').get((req, res) => {
     Users.findOneAndDelete({ _id: req.params.id }, (err, user) => {
- 
+        if (err)
+            res.json(err);
+        else
+            res.json('Removed successfully');
+    });
+});
+
+app.listen(4000, () => console.log(`Express server running on port 4000`));
