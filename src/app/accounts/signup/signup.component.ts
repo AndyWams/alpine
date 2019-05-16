@@ -18,7 +18,7 @@ export class SignupComponent implements OnInit {
   form: FormGroup;
   constructor(private userService: UserServiceService,
     private fb: FormBuilder, private router: Router,
-    ) { 
+    ) {
     this.form = this.fb.group({
       username: [null, Validators.compose([Validators.required, Validators.maxLength(20), Validators.minLength(3)])],
       email: [null, Validators.compose([Validators.required, Validators.email])],
@@ -64,7 +64,7 @@ export class SignupComponent implements OnInit {
 
 
   dismissMsg() {
-    setTimeout(function (succMsg) { 
+    setTimeout(function (succMsg) {
       this.dismiss = false;
     }, 3000);
   }
