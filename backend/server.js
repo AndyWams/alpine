@@ -12,7 +12,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // mongoose.connect('mongodb://[server]/issues');
-const CONNECTION_URI = 'mongodb://localhost:27017/alpynDb';
+const CONNECTION_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/alpynDb';
 //connect to mongoDb using mongoose
 mongoose.set('useCreateIndex', true)
 mongoose.connect(CONNECTION_URI, { useNewUrlParser: true });
@@ -131,4 +131,14 @@ router.route('/users/delete/:id').get((req, res) => {
     });
 });
 
-app.listen(4000, () => console.log(`Express server running on port 4000`));
+app.set('port', (process.env.PORT || 3000));
+// Listen for set port
+app.listen(app.get('port'), (err) => {
+    if (err) {
+        console.log("Error starting server");
+        console.log(err);
+        return
+    }
+
+    console.log("Server listening on port : " + app.get('port'));
+});
