@@ -43,7 +43,7 @@
                    form.controls['password'].touched}" type="password" class="form-control input-text js-text" >
               <label class="label" for="password">Password</label>
             <div class="invalid-feedback " *ngIf="form.controls['password'].hasError('required') && form.controls['password'].touched">
-              Username is required.</div>
+              Password is required.</div>
             </div>
             <div class="form-field col-lg-12 align-center">
               <button [disabled]="isBtnDisabled()" type="submit" class="btn btn-primary"><i *ngIf="loading" class="fas fa-spinner"></i> Create</button>
