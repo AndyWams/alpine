@@ -299,6 +299,11 @@ MIT
 @angular/router
 MIT
 
+@angular/animations
+MIT
+
+ng6-toastr-notifications
+
 @ngx-loading-bar/core
 MIT
 
