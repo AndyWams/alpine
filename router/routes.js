@@ -22,16 +22,25 @@ router.get('/users/:id', (req, res) => {
 });
 
 
-router.post('/users/add', (req, res) => {
-    const username = req.body.username;
+router.route('/users/add').post((req, res) => {
+     const username = req.body.username;
     const email = req.body.email;
     const password = req.body.password;
 
-    Users.find({email}).then(result => {
+    req.checkBody('username', 'Username field is required').notEmpty();
+    req.checkBody('email', 'Email field is required').notEmpty();
+    req.checkBody('email', 'Email is not valid').isEmail();
+    req.checkBody('password', 'Password field is required').notEmpty();
+
+    let errors = req.validationErrors();
+
+    if (errors) {
+        return res.status(400).send({ error: errors });
+    }
+    else {
+    Users.find({ email}).then(result => {
         if (result.length === 1) {
-             res.status(409).send({ error: 'User with this email already exists'});
-             return;
-             
+            return res.status(409).send({ error: 'User with this email already exists'});
         } else {
             let newUser = new Users({
                 username: username,
@@ -41,20 +50,22 @@ router.post('/users/add', (req, res) => {
             bcrypt.genSalt(10, (err, salt) => {
                 bcrypt.hash(newUser.password, salt, (err, hash) => {
                     if (err) {
-                        res.status(400);
-                        newUser.password = hash;
-                        return;
+                        return res.status(400).send({error: 'Bad request'});
                     } else {
-                        newUser.save().then(user => {
-                            res.status(200).send({ success: "SUCCESS", user }).json(user);
-                            return;
-                        })
+                        newUser.password = hash;
+                        newUser.save()
+                            .then(newUser => {
+                                return res.status(200).send({ success: "SUCCESS", newUser });
+                            })
+                            .catch(err => {
+                               return res.status(400).send({error: err});
+                            });           
                     }
                 });
             });
         }
     })
-
+}
 });
 
 router.post('/users/update/:id', (req, res) => {

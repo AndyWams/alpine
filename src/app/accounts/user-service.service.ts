@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { User } from './user';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
+
 
 
 @Injectable({
@@ -11,15 +11,13 @@ import { throwError } from 'rxjs';
 export class UserServiceService {
 
   constructor(private _http: HttpClient) { }
-  url = 'https://alpyn.herokuapp.com';
-  // url = 'http://localhost:3000'
 
   getUsers() {
-    return this._http.get(`${this.url}/users`);
+    return this._http.get(`${environment.userUrl}/users`);
   }
 
   getUser(id) {
-    return this._http.get(`${this.url}/users/${id}`);
+    return this._http.get(`${environment.userUrl}/users/${id}`);
   }
 
   createAccount(username: string, email: string, password: string) {
@@ -28,7 +26,7 @@ export class UserServiceService {
       email: email,
       password: password,
     };
-    return this._http.post(`${this.url}/users/add`, user);
+    return this._http.post(`${environment.userUrl}/users/add`, user);
   }
 
   updateUser(id: string, username: string, email: string, password: string) {
@@ -37,10 +35,10 @@ export class UserServiceService {
       email: email,
       password: password,
     };
-    return this._http.post(`${this.url}/users/update/${id}`, user);
+    return this._http.post(`${environment.userUrl}/users/update/${id}`, user);
   }
 
   deleteUser(id) {
-    return this._http.get(`${this.url}/users/delete/${id}`);
+    return this._http.get(`${environment.userUrl}/users/delete/${id}`);
   }
 }
