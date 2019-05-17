@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { User } from './user';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
+
 
 
 @Injectable({
@@ -28,7 +28,7 @@ export class UserServiceService {
       email: email,
       password: password,
     };
-    return this._http.post(`${this.url}/users/add`, user);
+    return this._http.post(`${environment.userUrl}/users/add`, user);
   }
 
   updateUser(id: string, username: string, email: string, password: string) {
