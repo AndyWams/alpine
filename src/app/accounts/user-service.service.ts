@@ -11,7 +11,7 @@ import { throwError } from 'rxjs';
 export class UserServiceService {
 
   constructor(private _http: HttpClient) { }
-url = 'http://localhost:3000';
+  url = 'https://alpyn.herokuapp.com';
 
   getUsers() {
     return this._http.get(`${this.url}/users`);
