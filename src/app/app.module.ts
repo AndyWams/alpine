@@ -17,6 +17,8 @@ import { ServicesComponent } from './services/services.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UserServiceService } from './accounts/user-service.service';
+import { ToastrModule } from 'ng6-toastr-notifications';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { UserServiceService } from './accounts/user-service.service';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(AppRoutes),
+    ToastrModule.forRoot(),
     LoadingBarRouterModule,
     FormsModule,
     ReactiveFormsModule,
