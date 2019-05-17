@@ -12,6 +12,7 @@ export class UserServiceService {
 
   constructor(private _http: HttpClient) { }
   url = 'https://alpyn.herokuapp.com';
+  // url = 'http://localhost:3000'
 
   getUsers() {
     return this._http.get(`${this.url}/users`);
