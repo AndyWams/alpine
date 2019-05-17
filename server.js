@@ -6,6 +6,7 @@ const app = express();
 const mongoose = require('mongoose');
 const path = require('path');
 const http = require('http')
+const expressValidator = require('express-validator');
 
 
 app.use(cors());
@@ -26,6 +27,23 @@ connection.once('open', () => {
 connection.on('error', function (err) {
     console.log(err);
 });
+
+//Express validator Middleware
+app.use(expressValidator({
+    errorFormatter: function (param, msg) {
+        var namespace = param.split('.'),
+            root = namespace.shift(),
+            formParam = root;
+        while (namespace.length) {
+            formParam += '[' + namespace.shift() + ']';
+        }
+
+        return {
+            msg: msg,
+         
+        };
+    }
+}));
 
 app.use('/', appRoute);
 app.use(express.static(path.join(__dirname, 'dist')));
