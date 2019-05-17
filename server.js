@@ -34,15 +34,27 @@ app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname + '/dist/index.html'));
 });
 
-const port = process.env.PORT || 3000;
+app.set('port', (process.env.PORT || 3000));
 // Listen for set port
-const server = http.createServer(app);
-server.listen(port, (err) => {
+app.listen(app.get('port'), (err) => {
     if (err) {
         console.log("Error starting server");
         console.log(err);
         return
     }
-    console.log("Server listening on port : " + port);
+
+    console.log("Server listening on port : " + app.get('port'));
 });
+
+// const port = process.env.PORT || 3000;
+// // Listen for set port
+// const server = http.createServer(app);
+// server.listen(port, (err) => {
+//     if (err) {
+//         console.log("Error starting server");
+//         console.log(err);
+//         return
+//     }
+//     console.log("Server listening on port : " + port);
+// });
 
