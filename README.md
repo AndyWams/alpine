@@ -1,5 +1,7 @@
 # alpyn
+# You can visit site below:
 https://andywams.github.io/alpyn/
+https://alpyn.herokuapp.com
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.3.
 
