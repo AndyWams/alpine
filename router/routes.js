@@ -27,9 +27,11 @@ router.post('/users/add', (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    Users.find({email}, {username}).then(result => {
+    Users.find({email}).then(result => {
         if (result.length === 1) {
-            return res.status(409).send({ error: 'User with this email already exists'})
+             res.status(409).send({ error: 'User with this email already exists'});
+             return;
+             
         } else {
             let newUser = new Users({
                 username: username,
@@ -39,18 +41,19 @@ router.post('/users/add', (req, res) => {
             bcrypt.genSalt(10, (err, salt) => {
                 bcrypt.hash(newUser.password, salt, (err, hash) => {
                     if (err) {
-                        res.status(400).send(err);
+                        res.status(400);
+                        newUser.password = hash;
+                        return;
+                    } else {
+                        newUser.save().then(user => {
+                            res.status(200).send({ success: "SUCCESS", user }).json(user);
+                            return;
+                        })
                     }
-                    newUser.password = hash;
-                    newUser.save().then(user => {
-                        res.status(200).send({ success: "SUCCESS",   user }).json(user);
-                    }).catch(err => {
-                        res.status(500).send({ err });
-                    })
                 });
             });
         }
-    });
+    })
 
 });
 

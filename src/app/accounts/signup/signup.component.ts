@@ -3,6 +3,7 @@ import { User } from '../user';
 import { UserServiceService } from '../user-service.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators  } from '@angular/forms';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-signup',
@@ -18,6 +19,7 @@ export class SignupComponent implements OnInit {
   form: FormGroup;
   constructor(private userService: UserServiceService,
     private fb: FormBuilder, private router: Router,
+    public toastr: ToastrManager,
     ) {
     this.form = this.fb.group({
       username: [null, Validators.compose([Validators.required, Validators.maxLength(20), Validators.minLength(3)])],
@@ -47,9 +49,10 @@ export class SignupComponent implements OnInit {
     this.userService.createAccount(username, email, password)
       .subscribe(
         successRes => {
+          this.toastr.successToastr('Account Created Successfully', null);
           this.succMsg = successRes['message'];
           this.form.reset();
-          this.router.navigate(['/accounts/login']);
+      
         },
         error => {
           this.loading = false;
