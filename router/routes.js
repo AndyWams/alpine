@@ -27,17 +27,6 @@ router.route('/users/add').post((req, res) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    req.checkBody('username', 'Username field is required').notEmpty();
-    req.checkBody('email', 'Email field is required').notEmpty();
-    req.checkBody('email', 'Email is not valid').isEmail();
-    req.checkBody('password', 'Password field is required').notEmpty();
-
-    let errors = req.validationErrors();
-
-    if (errors) {
-        return res.status(400).send({ error: errors });
-    }
-    else {
     Users.find({ email}).then(result => {
         if (result.length === 1) {
             return res.status(409).send({ error: 'User with this email already exists'});
@@ -54,8 +43,8 @@ router.route('/users/add').post((req, res) => {
                     } else {
                         newUser.password = hash;
                         newUser.save()
-                            .then(newUser => {
-                                return res.status(200).send({ success: "SUCCESS", newUser });
+                            .then(user => {
+                                return res.status(200).send({ success: "Account Created Successfully", user });
                             })
                             .catch(err => {
                                return res.status(400).send({error: err});
@@ -65,7 +54,7 @@ router.route('/users/add').post((req, res) => {
             });
         }
     })
-}
+
 });
 
 router.post('/users/update/:id', (req, res) => {
@@ -90,7 +79,7 @@ router.get('/users/delete/:id', (req, res) => {
         if (err)
             res.json(err);
         else
-            res.json('Removed successfully');
+            res.send('User Deleted');
     });
 });
 
