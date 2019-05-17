@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../user';
 import { UserServiceService } from '../user-service.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators  } from '@angular/forms';
 import { ToastrManager } from 'ng6-toastr-notifications';
 
+interface Success {
+  success: string;
+  newUser;
+}
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -48,19 +51,17 @@ export class SignupComponent implements OnInit {
     const password = this.f.password.value;
     this.userService.createAccount(username, email, password)
       .subscribe(
-        successRes => {
-          this.toastr.successToastr('Account Created Successfully', null);
-          this.succMsg = successRes['message'];
+        (response: Success) => {
+          this.toastr.successToastr(response.success, null, { maxShown: 1 });
           this.form.reset();
-      
+          this.router.navigate(['/accounts/login']);
         },
         error => {
           this.loading = false;
           this.errorMsg = error.error.error;
+
         },
-        () => {
-          this.loading = false;
-        }
+        () => {this.loading = false; }
 
       );
   }
