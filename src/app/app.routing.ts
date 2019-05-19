@@ -3,8 +3,13 @@ import { PageContentComponent } from './core/page-content/page-content.component
 import { BannerComponent } from './banner/banner.component';
 import { LoginComponent } from './accounts/login/login.component';
 import { SignupComponent } from './accounts/signup/signup.component';
+import { ProfileComponent } from './profile/profile.component';
 
 export const AppRoutes: Routes = [
+    {
+        path: 'profile',
+        component: ProfileComponent
+    },
     {
         path: '',
         component: PageContentComponent,
@@ -21,6 +26,6 @@ export const AppRoutes: Routes = [
             path: 'accounts/signup',
             component: SignupComponent
         }
-        ]
+        ],
     },
 ];

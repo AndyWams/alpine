@@ -1,0 +1,33 @@
+<div class="backstretch" id="bkstretch">
+  <div class="wrapper">
+    <!-- Page Content Holder -->
+    <div>
+      <div class="overlay"></div>
+      <nav class="navbar  navbar-expand-lg navbar-light fixed-top navigate-header">
+        <div class="container-fluid">
+          <div class="title-name">
+            <span>hi,</span><span *ngIf="user"> {{data.user.username}}</span>
+          </div>
+          <div class="d-inline-block d-lg-none ml-auto" data-target="#navbarSupportedContent">
+            <!-- header text -->
+            <span class="login">
+              <span (click)="logout()"
+                   *ngIf="showProfile">Logout</span>
+            </span>
+          </div>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav navbar-nav ml-auto">
+              <li class="nav-item">
+                <span (click)="logout()"
+                    class="login" *ngIf="showProfile">logout</span>
+            
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <!-- end of wrapper -->
+  </div>
+  <!-- end of bkstretch -->
+</div>

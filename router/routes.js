@@ -1,7 +1,10 @@
-import Users from '../models/Users';
+
 import express from 'express';
 const router = express.Router();
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+import Users from '../models/Users';
+
 
 router.get('/users', (req, res) => {
     Users.find((err, users) => {
@@ -81,6 +84,72 @@ router.get('/users/delete/:id', (req, res) => {
         else
             res.send('User Deleted');
     });
+});
+
+router.post('/auth/login',  (req, res, next) => {
+    const email = req.body.email;
+    const password = req.body.password;
+    Users.find({email: email})
+    .exec()
+    .then(user => {
+        if(user.length < 1 ) {
+            return res.status(401).send({
+                error: 'Invalid email or password',
+                message: 'Invalid email or password'
+            });
+        }
+        bcrypt.compare(password, user[0].password,  (err, result) => {
+            if (err) {
+                return res.status(401).send({
+                    error: 'Invalid email or password',
+                    message: 'Invalid email or password' });
+            }
+            if (result) {
+                const userDetail = {
+                    id: user[0]._id,
+                    userId: user[0]._id,
+                    username: user[0].username,
+                    email: user[0].email,
+                    role: user[0].role,
+                    createdDate: user[0].date,
+
+                }
+               const token = jwt.sign({
+                    id: user[0]._id,
+                    email: user[0].email,
+                    userId: user[0]._id,
+                    role: user[0].role,
+                    createdDate: user[0].date
+                }, "secret",
+                {
+                    expiresIn: "1h"
+                });
+                return res.status(200).json({
+                    message: 'Auth Successful',
+                    token: token,
+                    user: userDetail
+                    
+                });
+               
+            } 
+            return res.status(401).send({
+                error: 'Invalid email or password',
+                message: 'Invalid email or password'
+            });
+        });
+    })
+    .catch(err => {
+        res.status(500).json({
+            error: err
+        });
+    })
+});
+
+//Logout
+router.get('/logout',  (req, res) => {
+    req.logout();
+    req.send(success, 'You are logged out');
+    res.redirect('/accounts/login');
 });
 
 export default router;

@@ -26,4 +26,5 @@ let Users = new Schema({
     }
 });
 
-export default mongoose.model('Users', Users);
+// export default mongoose.model('Users', Users);
+module.exports = Users = mongoose.model('Users', Users)

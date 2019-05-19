@@ -1,5 +1,14 @@
 
 
+.form-control {
+    box-shadow: none;
+    padding: 0px;
+    border-radius: 0px;
+}
+
+.form-control.is-invalid:focus {
+    box-shadow: none;
+}
 
 .login-wrapper .header-top h1 {
     color: #00000091;

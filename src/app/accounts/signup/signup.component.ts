@@ -66,11 +66,4 @@ export class SignupComponent implements OnInit {
       );
   }
 
-
-  dismissMsg() {
-    setTimeout(function (succMsg) {
-      this.dismiss = false;
-    }, 3000);
-  }
-
 }

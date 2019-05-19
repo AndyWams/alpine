@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
+import { AuthenticationService } from '../accounts/authentication-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-banner',
@@ -8,7 +10,8 @@ import * as $ from 'jquery';
 })
 export class BannerComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authenticationService: AuthenticationService, private router: Router,
+    ) { }
 
   ngOnInit() {
     $(document).ready( () => {
@@ -18,6 +21,13 @@ export class BannerComponent implements OnInit {
         }, 1000);
       });
     });
+  }
+
+  logout() {
+    if (this.authenticationService.currentUserValue) {
+      this.authenticationService.logout();
+    }
+    this.router.navigate(['/account/login']);
   }
 
 }
