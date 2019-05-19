@@ -5,17 +5,20 @@
         <div class="col-lg-12">
         <div class="header-top">
                 <h1>Connect Now</h1>
-                <form class="account-form row">
+                <div class="alert alert-danger" *ngIf="errorMsg">
+                    {{errorMsg }}</div>
+                <form class="account-form row" [formGroup]="form" (ngSubmit)="onSubmit()">
                     <div class="form-field col-lg-6">
-                        <input id="email" type="text" class="input-text" required>
+                        <input id="email" type="text" class="form-control input-text" [formControl]="form.controls['email']">
                         <label class="label" for="email">Email</label>
                     </div>
                     <div class="form-field col-lg-6">
-                        <input id="password" type="password" class="input-text not-empty" required>
+                        <input id="password" type="password" class="form-control input-text not-empty" [formControl]="form.controls['password']">
                         <label class="label" for="email">Password</label>
                     </div>
                     <div class="form-field col-lg-12 align-center">
-                        <input  type="submit" class="submit-btn" value="Connect">
+                        <button [disabled]="!form.valid" type="submit" class="btn btn-primary"><i *ngIf="loading"
+                                class="fa fa-spinner fa-spin"></i> Connect</button>
                     </div>
                     <div class="col-lg-12 align-center sign-up">
                         <p class="connect-now"> <span><a href ="#password-recovery" class="passwrd-recovry">Forgot password?</a></span> | Don't have an account? | <span><a routerLink='/accounts/signup' class="signup-acct">Create an  account.</a></span></p>
