@@ -46,4 +46,9 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['/accounts/login']);
   }
 
+  home() {
+    this.router.navigate(['/']);
+  }
+
+
 }
