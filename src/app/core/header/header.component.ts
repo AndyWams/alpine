@@ -7,10 +7,18 @@ import * as $ from 'jquery';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
-  constructor() { }
-
+  user = {};
+  showProfile = false;
+  showLogin = true;
+  constructor() {
+   }
+   getUserInfo() {
+     if(this.user !== '') {
+       this.user = JSON.parse(localStorage.getItem('currentUser'));
+     }
+   }
   ngOnInit() {
+    this.getUserInfo();
     $(document).on('scroll', function () {
 
       if ($(document).scrollTop() >= 20) {
@@ -21,6 +29,18 @@ export class HeaderComponent implements OnInit {
         $('.navbar').removeClass('compressed');
       }
     });
+    this.fetchSingleUser();
+
+  }
+
+  fetchSingleUser() {
+    if (this.user) {
+      this.showProfile = true;
+      this.showLogin = false;
+    } else {
+      this.showProfile = false;
+      this.showLogin = true;
+    }
   }
 
 }

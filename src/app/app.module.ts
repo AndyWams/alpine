@@ -19,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserServiceService } from './accounts/user-service.service';
 import { ToastrModule } from 'ng6-toastr-notifications';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SignupComponent,
     AboutComponent,
     ServicesComponent,
-    PortfolioComponent
+    PortfolioComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
