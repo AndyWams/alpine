@@ -19,19 +19,29 @@ import {
 export class LoginComponent implements OnInit {
   loading = false;
   errorMsg;
+  user = {};
+  data;
   public form: FormGroup;
-  baseUrl = '/profile';
+  // baseUrl = `/profile/${this.data.id}`;
   returnUrl: string;
   constructor(private authenticationService: AuthenticationService,
     public toastr: ToastrManager,
     private fb: FormBuilder, private router: Router,
     private _activatedRoute: ActivatedRoute) {
 
-      if (this.authenticationService.currentUserValue) {
-        this.router.navigate([this.baseUrl]);
-      }
+      // if (this.authenticationService.currentUserValue) {
+      //   this.router.navigate([this.baseUrl]);
+      // }
      }
 
+  getUserInfo() {
+    if (this.user !== '') {
+      this.user = JSON.parse(localStorage.getItem('currentUser'));
+      const extractDetails = { user: this.user };
+      this.data = extractDetails;
+      console.log(this.data);
+    }
+  }
   ngOnInit() {
     this.form = this.fb.group({
       email: [null, Validators.compose([Validators.required])],
@@ -62,7 +72,7 @@ export class LoginComponent implements OnInit {
         data => {
           this.toastr.successToastr('Login Authenticated', null, { maxShown: 1 });
           this.form.reset();
-          this.router.navigate([this.returnUrl || this.baseUrl]);
+          this.router.navigate([this.returnUrl || `/profile`]);
         },
         error => {
           this.errorMsg = error.error.message;
