@@ -20,6 +20,9 @@ import { UserServiceService } from './accounts/user-service.service';
 import { ToastrModule } from 'ng6-toastr-notifications';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProfileComponent } from './profile/profile.component';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { AuthGuard } from './guard/auth.guard';
+import { Error404Component } from './error/error404/error404.component';
 
 @NgModule({
   declarations: [
@@ -34,18 +37,21 @@ import { ProfileComponent } from './profile/profile.component';
     ServicesComponent,
     PortfolioComponent,
     ProfileComponent,
+    Error404Component,
   ],
   imports: [
-    BrowserModule,
+  BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(AppRoutes),
     ToastrModule.forRoot(),
+    BsDropdownModule.forRoot(),
     LoadingBarRouterModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [UserServiceService],
+  entryComponents: [],
+  providers: [UserServiceService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

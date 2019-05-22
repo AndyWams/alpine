@@ -1,20 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy} from '@angular/core';
 import { AuthenticationService } from '../accounts/authentication-service.service';
 import { ToastrManager } from 'ng6-toastr-notifications';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { UserServiceService } from '../accounts/user-service.service';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
   user = {};
   data;
   showProfile = false;
   showLogin = true;
+  userID;
+  userInfo;
   constructor(private authenticationService: AuthenticationService,
-    public toastr: ToastrManager, private router: Router,) {
+    public toastr: ToastrManager, private router: Router,
+    private ref: ChangeDetectorRef,
+    private userService: UserServiceService,
+    private route: ActivatedRoute) {
   }
   getUserInfo() {
     if (this.user !== '') {
@@ -40,14 +47,17 @@ export class ProfileComponent implements OnInit {
   }
 
   logout() {
-    if (this.authenticationService.currentUserValue) {
-      this.authenticationService.logout();
-    } this.toastr.successToastr('Good bye...', null, { toastTimeout: 1000 });
-    this.router.navigate(['/accounts/login']);
+    this.authenticationService.logout();
+    this.ref.detectChanges();
   }
 
   home() {
     this.router.navigate(['/']);
+  }
+
+  ngOnDestroy() {
+    this.getUserInfo();
+    this.ref.markForCheck();
   }
 
 
