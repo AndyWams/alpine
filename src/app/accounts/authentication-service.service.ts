@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { User } from 'src/app/models/user';
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
+// import { jwtHelper, tokenNotExpired } from 'angular2-jwt';
 
 
 @Injectable({
@@ -15,7 +16,8 @@ export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router,
+   ) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
    }
@@ -24,6 +26,11 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
+  get isUser() {
+    return (this.currentUserValue.roles);
+  }
+
+ 
   login(email: string, password: string) {
     return this.http.post<any>(`${environment.userUrl}/auth/login`, { email, password })
       .pipe(map(status => {
@@ -44,10 +51,9 @@ export class AuthenticationService {
   }
 
   logout(returnUrl?: string) {
-    // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
-    this.router.navigate(['/accounts/login']);
+    this.router.navigate([returnUrl || '/accounts/login']);
   }
 
 }
