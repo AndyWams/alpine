@@ -17,7 +17,7 @@ export class UserServiceService {
   }
 
   getUser(id) {
-    return this._http.get(`${environment.userUrl}/users/${id}`);
+    return this._http.get(`${environment.userUrl}/user/${id}`);
   }
 
   createAccount(username: string, email: string, password: string) {
