@@ -64,7 +64,6 @@ export class HeaderComponent implements OnInit, OnDestroy  {
   }
 
   ngOnDestroy() {
-    this.getUserInfo();
     this.ref.markForCheck();
   }
 

@@ -23,6 +23,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { AuthGuard } from './guard/auth.guard';
 import { Error404Component } from './error/error404/error404.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { Error404Component } from './error/error404/error404.component';
     RouterModule.forRoot(AppRoutes),
     ToastrModule.forRoot(),
     BsDropdownModule.forRoot(),
+    NgbModule.forRoot(),
     LoadingBarRouterModule,
     FormsModule,
     ReactiveFormsModule,

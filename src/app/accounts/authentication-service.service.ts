@@ -50,10 +50,10 @@ export class AuthenticationService {
       }));
   }
 
-  logout(returnUrl?: string) {
+  logout() {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
-    this.router.navigate([returnUrl || '/accounts/login']);
+    window.location.replace('/accounts/login');
   }
 
 }

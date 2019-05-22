@@ -48,7 +48,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   logout() {
     this.authenticationService.logout();
-    this.ref.detectChanges();
   }
 
   home() {
@@ -56,7 +55,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.getUserInfo();
     this.ref.markForCheck();
   }
 
