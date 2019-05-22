@@ -1,9 +1,10 @@
 
 import express from 'express';
+import Users from '../models/Users';
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-import Users from '../models/Users';
+const  checkauth = require('../middleware/check-auth');
 
 
 router.get('/users', (req, res) => {
@@ -15,7 +16,7 @@ router.get('/users', (req, res) => {
     });
 });
 
-router.get('/users/:id', (req, res) => {
+router.get('/user/:id', checkauth, (req, res) => {
     Users.findById(req.params.id, (err, user) => {
         if (err)
             res.json({ 'message': err });
