@@ -59,21 +59,48 @@
           </div>
           <div class="d-inline-block d-lg-none ml-auto" data-target="#navbarSupportedContent">
             <!-- header text -->
-            <span class="login">
-              <a routerLink='/profile' routerLinkActive="active"
-                [routerLinkActiveOptions]="{exact: true}"><span  *ngIf="showProfile">Profile</span></a>
-              <a routerLink='/accounts/login' routerLinkActive="active"
-                [routerLinkActiveOptions]="{exact: true}"><span *ngIf="showLogin">Account</span></a>
-            </span>
+            <div class="dropdown" dropdown *ngIf="showProfile">
+              <a dropdownToggle class="pull-right text-center btn btn-setting dropdown-toggle" data-toggle="dropdown"
+                aria-haspopup="true" aria- expanded="true" style="cursor: pointer;">
+                <span>hi,</span><span *ngIf="user"> {{data.user.username}}</span>
+              </a>
+              <ul *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                <li class="nav-item text-center" style="padding: 4px;">
+                  <span (click)="profile()" class="submenu">Profile</span>
+                </li>
+                <div class="dropdown-divider my-0"></div>
+                <li class="nav-item text-center" style="padding: 4px;">
+                  <span (click)="logout()" class="submenu">logout</span>
+                </li>
+                <div class="dropdown-divider my-0"></div>
+                <li class="nav-item text-center" style="padding: 4px;">
+                  <span class="submenu">Edit Profile</span>
+                </li>
+              </ul>
+            </div>
+            <span class="login" *ngIf="showLogin"><a routerLink="/accounts/login">Account</a></span>
           </div>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="nav navbar-nav ml-auto">
-              <li class="nav-item">
-                <a routerLink='/profile' routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><span class="login"
-                    *ngIf="showProfile">Profile</span></a>
-                <a routerLink='/accounts/login' routerLinkActive="active"
-                  [routerLinkActiveOptions]="{exact: true}"><span *ngIf="showLogin" class="login">Account</span></a>
-              </li>
+              <div class="dropdown" dropdown *ngIf="showProfile">
+                <a dropdownToggle class="pull-right text-center btn btn-setting dropdown-toggle" data-toggle="dropdown"
+                  aria-haspopup="true" aria- expanded="true" style="cursor: pointer;">
+                  <span>hi,</span><span *ngIf="user"> {{data.user.username}}</span></a>
+                <ul *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                  <li class="nav-item text-center" style="padding: 4px;">
+                    <span (click)="profile()" class="submenu" *ngIf="showProfile">Profile</span>
+                  </li>
+                  <div class="dropdown-divider my-0"></div>
+                  <li class="nav-item text-center" style="padding: 4px;">
+                    <span (click)="logout()" class="submenu" *ngIf="showProfile">logout</span>
+                  </li>
+                  <div class="dropdown-divider my-0"></div>
+                  <li class="nav-item text-center" style="padding: 4px;">
+                    <span class="submenu" *ngIf="showProfile">Edit Profile</span>
+                  </li>
+                </ul>
+              </div>
+              <span class="login" *ngIf="showLogin"><a routerLink="/accounts/login">Account</a></span>
             </ul>
           </div>
         </div>
