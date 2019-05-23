@@ -24,6 +24,13 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { AuthGuard } from './guard/auth.guard';
 import { Error404Component } from './error/error404/error404.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+
+
+
 
 @NgModule({
   declarations: [
@@ -50,7 +57,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     LoadingBarRouterModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule
+
   ],
   entryComponents: [],
   providers: [UserServiceService, AuthGuard],
