@@ -23,7 +23,7 @@
                             </mat-form-field>
                         </div>
                         <div class="form-field col-lg-12 align-center">
-                            <button [disabled]="!form.valid" type="submit" class="btn btn-primary"><i *ngIf="loading"
+                            <button mat-raised-button color="primary" [disabled]="!form.valid || loading" type="submit"><i *ngIf="loading"
                                     class="fa fa-spinner fa-spin"></i> Connect</button>
                         </div>
                         <div class="col-lg-12 align-center sign-up">
