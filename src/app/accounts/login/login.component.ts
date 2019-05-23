@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   errorMsg;
   user = {};
   data;
+  hide = true;
   public form: FormGroup;
   // baseUrl = `/profile/${this.data.id}`;
   returnUrl: string;
@@ -28,10 +29,10 @@ export class LoginComponent implements OnInit {
     public toastr: ToastrManager,
     private fb: FormBuilder, private router: Router,
     private _activatedRoute: ActivatedRoute) {
-
-      // if (this.authenticationService.currentUserValue) {
-      //   this.router.navigate([this.baseUrl]);
-      // }
+    this.form = this.fb.group({
+      email: [null, Validators.compose([Validators.required, Validators.email])],
+      password: [null, Validators.compose([Validators.required])]
+    });
      }
 
   getUserInfo() {
@@ -39,15 +40,10 @@ export class LoginComponent implements OnInit {
       this.user = JSON.parse(localStorage.getItem('currentUser'));
       const extractDetails = { user: this.user };
       this.data = extractDetails;
-      console.log(this.data);
     }
   }
-  ngOnInit() {
-    this.form = this.fb.group({
-      email: [null, Validators.compose([Validators.required])],
-      password: [null, Validators.compose([Validators.required])]
-    });
 
+  ngOnInit() {
     this._activatedRoute.queryParamMap.pipe(take(1)).subscribe(params => {
       this.returnUrl = params.get('returnUrl');
     });
