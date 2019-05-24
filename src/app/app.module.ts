@@ -15,7 +15,11 @@ import { SignupComponent } from './accounts/signup/signup.component';
 import { AboutComponent } from './about/about.component';
 import { ServicesComponent } from './services/services.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
-import { HttpClientModule } from '@angular/common/http';
+import {
+  HttpClientModule,
+    HttpClient,
+    HTTP_INTERCEPTORS
+} from '@angular/common/http';
 import { UserServiceService } from './accounts/user-service.service';
 import { ToastrModule } from 'ng6-toastr-notifications';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -28,6 +32,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ProfileContentComponent } from './profile/profile-content/profile-content.component';
+import { JwtInterceptor } from './interceptor/interceptor.jwt';
+import { ErrorInterceptor } from './interceptor/interceptor.error';
 
 
 
@@ -46,6 +55,7 @@ import { MatButtonModule } from '@angular/material/button';
     PortfolioComponent,
     ProfileComponent,
     Error404Component,
+    ProfileContentComponent,
   ],
   imports: [
   BrowserModule,
@@ -61,11 +71,17 @@ import { MatButtonModule } from '@angular/material/button';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTabsModule,
+    MatCheckboxModule
 
   ],
   entryComponents: [],
-  providers: [UserServiceService, AuthGuard],
+  providers: [UserServiceService, AuthGuard, 
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+  
+  ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
