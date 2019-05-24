@@ -30,7 +30,6 @@ export class AuthenticationService {
     return (this.currentUserValue.roles);
   }
 
- 
   login(email: string, password: string) {
     return this.http.post<any>(`${environment.userUrl}/auth/login`, { email, password })
       .pipe(map(status => {

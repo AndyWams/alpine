@@ -17,6 +17,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   showLogin = true;
   userID;
   userInfo;
+  userData;
   constructor(private authenticationService: AuthenticationService,
     public toastr: ToastrManager, private router: Router,
     private ref: ChangeDetectorRef,
@@ -33,7 +34,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getUserInfo();
     this.fetchSingleUser();
+    this.fetchUserData();
 
+  }
+
+  fetchUserData() {
+    this.userService.getUser(this.data.user.id).subscribe((data) => {
+      this.userData = data;
+    });
   }
 
   fetchSingleUser() {
