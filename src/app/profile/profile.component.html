@@ -66,8 +66,6 @@
                 <span id="userName" class="ml-2" style="text-transform: capitalize;">{{data.user.username}}</span>
               </a>
               <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right">
-                <button class="dropdown-item py-2">Edit Profile</button>
-                <div class="dropdown-divider"></div>
                 <button class="dropdown-item py-2" (click)="logout()">Logout</button>
               </div>
             </li>
@@ -80,3 +78,4 @@
   </div>
   <!-- end of bkstretch -->
 </div>
+<app-profile-content [UserData]="data.user"></app-profile-content>
