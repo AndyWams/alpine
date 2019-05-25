@@ -20,7 +20,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                 case 401:
                     // auto logout if 401 response returned from api
                     this.authenticationService.logout();
-                    location.reload(true);
+                    this.router.navigate(['/accounts/login']);
                     break;
                 case 400:
                     return throwError(this.getValidationError(err.error.data ? err.error.data : err.error));
