@@ -35,7 +35,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     }
 
     isLogin(request: HttpRequest<any>): any {
-        return request.url.search('/accounts/login') !== -1;
+        return request.url.search('/auth/login') !== -1;
     }
 
     getValidationError(errors): string {
