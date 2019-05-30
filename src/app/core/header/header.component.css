@@ -48,14 +48,15 @@ ul.dropdown-menu.show {
 }
 
 .navigate-header { 
-    background-color:rgba(0, 0, 0, 0.88);
+    /* background-color:rgba(0, 0, 0, 0.88); */
     color: #fff;
     transition: all 1s;
     z-index: 999;
+    padding: 18px;
 }
 
 .navigate-header.compressed { 
-    background-color: #162737;
+    background-color: rgba(4, 49, 90, 0.8392156862745098);
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
 } 
 
