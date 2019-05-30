@@ -1,7 +1,6 @@
 
 import express from 'express';
 import Users from '../models/Users';
-import Profile from '../models/Profile';
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
