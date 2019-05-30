@@ -1,6 +1,28 @@
 import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
+const skillsSub = new Schema({
+    name: {
+        type: String,
+    },
+
+});
+const experienceSub = new Schema({
+    title: {
+        type: String,
+    },
+    description: {
+        type: String,
+    },
+    startDate: {
+        type: String
+    },
+    endDate: {
+        type: String
+    },
+
+});
+
 
 let Users = new Schema({
     username: {
@@ -23,8 +45,27 @@ let Users = new Schema({
     role: {
         type: String,
         default: "User"
-    }
+    },
+    firstname: {
+        type: String,
+        defualt: ""
+    },
+    lastname: {
+        type: String,
+        default: ""
+    },
+    phone: {
+        type: String,
+        default: ""
+    },
+    about: {
+        type: String,
+        default: ""
+
+    },
+    
+    skills: [skillsSub],
+    experience: [experienceSub]
 });
 
-// export default mongoose.model('Users', Users);
 module.exports = Users = mongoose.model('Users', Users)
