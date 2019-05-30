@@ -1,6 +1,7 @@
 
 import express from 'express';
 import Users from '../models/Users';
+import Profile from '../models/Profile';
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -16,7 +17,7 @@ router.get('/users', (req, res) => {
     });
 });
 
-router.get('/user/:id', checkauth, (req, res) => {
+router.get('/user/:id', (req, res) => {
     Users.findById(req.params.id, (err, user) => {
         if (err)
             res.json({ 'message': err });
@@ -61,14 +62,13 @@ router.route('/users/add').post((req, res) => {
 
 });
 
-router.post('/users/update/:id', (req, res) => {
+router.post('/user/update/:id', (req, res) => {
     Users.findById(req.params.id, (err, user) => {
         if (!user)
             return next(new Error('Could not load Document'));
         else {
             user.username = req.body.username;
-            user.email = req.body.email;
-            user.password = req.body.password;
+            // user.email = req.body.email;
             user.save().then(user => {
                 res.status(200).send(user);
             }).catch(err => {
@@ -146,11 +146,109 @@ router.post('/auth/login',  (req, res, next) => {
     })
 });
 
-//Logout
-router.get('/logout',  (req, res) => {
-    req.logout();
-    req.send(success, 'You are logged out');
-    res.redirect('/accounts/login');
+router.put('/profile/:id', (req, res) => {
+    Users.findById(req.params.id, (err, profile) => {
+        if (!profile)
+            return res.json({ 'message': err });
+        else {
+            profile.firstname = req.body.firstname;
+            profile.lastname = req.body.lastname;
+            profile.phone = req.body.phone;
+            profile.save().then(profile => {
+                
+                return res.status(200).send({ success: "Profile Created Successfully", profile });
+            }).catch(err => {
+                res.status(400).send({ 'message': err });
+            });
+        }
+    });
 });
+
+
+
+router.put('/about/:id', (req, res) => {
+    Users.findById(req.params.id, (err, user) => {
+        if (!user)
+            return res.json({ 'message': err });
+        else {
+            user.about = req.body.about;
+            user.save().then(user => {
+
+                return res.status(200).send({ success: "About Created Successfully", user });
+            }).catch(err => {
+                res.status(400).send({ 'message': err });
+            });
+        }
+    });
+});
+
+
+router.post('/skills/:id', (req, res) => {
+    Users.findById(req.params.id, (err, user) => {
+        if (!user)
+            return res.status(400).send({ 'message': err });
+        else {
+            user.skills = req.body.skills;
+        
+            user.save().then(user => {
+
+                return res.status(200).send({ success: "Skills Created Successfully", user });
+            }).catch(err => {
+                res.status(400).send({ 'message': err });
+            });
+        }
+    });
+});
+
+router.get('/user/skills/:id', (req, res) => {
+    Users.findById(req.params.id, (err, user) => {
+        if (err)
+            res.json({ 'message': err });
+        else
+            res.json(user);
+    })
+});
+
+
+// router.post('/createprofile', (req, res) => {
+//             const firstname = req.body.firstname;
+//             const lastname = req.body.lastname;
+//             const phone = req.body.phone;
+//             let userProfile = new Users({
+//                 firstname: firstname,
+//                 lastname: lastname,
+//                 phone: phone
+//             });
+
+//             userProfile.save( (err) => {
+//                 if (err) {
+//                     console.log(err);
+//                     res.status(400).send({ 'message': 'Bad request' });
+//                 }
+//                 else {
+//                     return res.status(200).send({ success: "Profile Created Successfully", userProfile });
+//                 }
+//             });   
+// })
+
+
+// router.get('/profiles', (req, res) => {
+//     Profile.find((err, profiles) => {
+//         if (err)
+//             res.send(err);
+//         else
+//             res.status(200).send(profiles);
+//     });
+// });
+
+// router.get('/profile/:userid/:id', (req, res) => {
+//     Profile.findById(req.params.id, (err, profile) => {
+//         if (err)
+//             res.json({ 'message': err });
+//         else
+//             res.json(profile);
+//     })
+// });
+
 
 export default router;

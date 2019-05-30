@@ -15,14 +15,6 @@ export const AppRoutes: Routes = [
         children: [
             {path: '',
             component: BannerComponent
-        },
-        {
-            path: 'accounts/login',
-            component: LoginComponent
-        },
-        {
-            path: 'accounts/signup',
-            component: SignupComponent
         }
         ],
     },
@@ -30,6 +22,15 @@ export const AppRoutes: Routes = [
         path: 'profile',
         component: ProfileComponent,
         canActivate: [AuthGuard]
+    },
+     {
+        path: 'accounts/login',
+        component: LoginComponent,
+
+    },
+    {
+        path: 'accounts/signup',
+        component: SignupComponent
     },
     {
         path: '404', component: Error404Component
