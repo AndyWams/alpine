@@ -48,19 +48,15 @@ let Users = new Schema({
     },
     firstname: {
         type: String,
-        defualt: ""
     },
     lastname: {
         type: String,
-        default: ""
     },
     phone: {
         type: String,
-        default: ""
     },
     about: {
         type: String,
-        default: ""
 
     },
     

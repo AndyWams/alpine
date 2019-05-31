@@ -3,3 +3,5 @@ export const environment = {
   userUrl: 'https://alpyn.herokuapp.com'
 
 };
+// https://alpyn.herokuapp.com
+// http://localhost:3000

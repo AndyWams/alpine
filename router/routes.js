@@ -19,9 +19,10 @@ router.get('/users', (req, res) => {
 router.get('/user/:id', (req, res) => {
     Users.findById(req.params.id, (err, user) => {
         if (err)
-            res.json({ 'message': err });
+            return res.send({ 'message': err });
         else
-            res.json(user);
+
+            return res.status(200).send({ success: "Success", user });
     })
 });
 
@@ -86,7 +87,7 @@ router.get('/users/delete/:id', (req, res) => {
     });
 });
 
-router.post('/auth/login',  (req, res, next) => {
+router.post('/auth/login', (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
     Users.find({email: email})
@@ -168,7 +169,7 @@ router.put('/profile/:id', (req, res) => {
 router.put('/about/:id', (req, res) => {
     Users.findById(req.params.id, (err, user) => {
         if (!user)
-            return res.json({ 'message': err });
+            res.status(400).send({ 'message': err });
         else {
             user.about = req.body.about;
             user.save().then(user => {
@@ -182,7 +183,7 @@ router.put('/about/:id', (req, res) => {
 });
 
 
-router.post('/skills/:id', (req, res) => {
+router.put('/skills/:id', (req, res) => {
     Users.findById(req.params.id, (err, user) => {
         if (!user)
             return res.status(400).send({ 'message': err });
@@ -208,27 +209,6 @@ router.get('/user/skills/:id', (req, res) => {
     })
 });
 
-
-// router.post('/createprofile', (req, res) => {
-//             const firstname = req.body.firstname;
-//             const lastname = req.body.lastname;
-//             const phone = req.body.phone;
-//             let userProfile = new Users({
-//                 firstname: firstname,
-//                 lastname: lastname,
-//                 phone: phone
-//             });
-
-//             userProfile.save( (err) => {
-//                 if (err) {
-//                     console.log(err);
-//                     res.status(400).send({ 'message': 'Bad request' });
-//                 }
-//                 else {
-//                     return res.status(200).send({ success: "Profile Created Successfully", userProfile });
-//                 }
-//             });   
-// })
 
 
 // router.get('/profiles', (req, res) => {

@@ -3,6 +3,7 @@ import { User } from './user';
 import { HttpClient, HttpErrorResponse, HttpHeaders  } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 // import { Http, Headers, Response } from '@angular/http';
+import { map } from 'rxjs/operators';
 
 
 @Injectable({
@@ -29,6 +30,15 @@ export class UserServiceService {
     return this._http.post(`${environment.userUrl}/users/add`, user);
   }
 
+  updateAbout(id: string, about: string) {
+    return this._http.put<any>(`${environment.userUrl}/about/${id}`,
+    {
+      about
+    })
+    .pipe(map(response => {
+      return response;
+    }));
+  }
 
   updateUser(id: string, username: string, email: string, password: string) {
     const user = {
