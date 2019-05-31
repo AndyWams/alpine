@@ -23,13 +23,13 @@ export class ErrorInterceptor implements HttpInterceptor {
                     this.router.navigate(['/accounts/login']);
                     break;
                 case 400:
-                    return throwError(this.getValidationError(err.error.data ? err.error.data : err.error));
+                    return throwError(this.getValidationError(err.error.data ? err.error.data : err.error.error));
                 case 409:
                     return throwError(err.error.data ? err.error.data.error : err.error);
                 default:
                     return throwError('Sorry this operation could not be completed at this time.');
             }
-            const error = err.error ? err.error.message : err.statusText ? err.statusText : '';
+            const error = err.error ? err.error.error.message : err.statusText;
             return throwError(error);
         }));
     }
