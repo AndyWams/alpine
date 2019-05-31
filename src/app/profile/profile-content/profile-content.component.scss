@@ -16,6 +16,16 @@ p, h6, span, mat-tab {
     min-height: 150px;
 }
 
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
 .wrap-header {
   padding: 18px 0px 25px 0px;
 }
@@ -23,6 +33,23 @@ p, h6, span, mat-tab {
 .user-avatar {
   font-size: 117px;
   text-align: center;
+}
+
+.about-me {
+    padding: 5px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #eee;
+    font-family: 'Quicksand', sans-serif; 
+    text-align: center;
+    font-size: 14px;
+    color: cadetblue;
+}
+
+.grayed-out {
+    color: #eee;
+    font-size: 12px;
+    text-align: center;
 }
 
 .user-abt {
