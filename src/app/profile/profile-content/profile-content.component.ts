@@ -31,8 +31,8 @@ export class ProfileContentComponent implements OnInit {
     private changeDetectorRefs: ChangeDetectorRef) {}
 
   ngOnInit() {
-    this.getUserInfo();
     this.fetchUserData();
+    this.getUserInfo();
   }
 
   getUserInfo() {
@@ -45,7 +45,6 @@ export class ProfileContentComponent implements OnInit {
 
   fetchUserData() {
     this.userService.getUser(this.UserData.id).subscribe((user: UserResponse) => {
-      console.log(user.user)
      if(user) {
        this.userData = user.user;
      }
@@ -120,7 +119,6 @@ export class ProfileContentComponent implements OnInit {
       this.fetchUserData();
       this.toastr.successToastr('About Added Successfully', null, { maxShown: 1 });
       this.hideAboutForm();
-        this.changeDetectorRefs.detectChanges();
       },
       errorRes => {
         this.loading = false;
