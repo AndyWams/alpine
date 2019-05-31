@@ -1,8 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { NgbTabset } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit, Input, ChangeDetectorRef  } from '@angular/core';
+import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { UserServiceService } from 'src/app/accounts/user-service.service';
+
+interface UserResponse {
+  user: any;
+}
 
 @Component({
   selector: 'app-profile-content',
@@ -10,18 +13,26 @@ import { UserServiceService } from 'src/app/accounts/user-service.service';
   styleUrls: ['./profile-content.component.scss']
 })
 export class ProfileContentComponent implements OnInit {
+  public form: FormGroup;
   tabs: any[] = [];
   user = {};
   data: any;
   userData;
+  showAbout = false;
+  userAbouts;
+  loading = false;
+  displayAbout = true;
   selected = new FormControl(0);
- @Input() UserData: any;
+ @Input() UserData;
   constructor(
     public toastr: ToastrManager,
-    private userService: UserServiceService,) { }
+    private userService: UserServiceService,
+    private fb: FormBuilder,
+    private changeDetectorRefs: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.getUserInfo();
+    this.fetchUserData();
   }
 
   getUserInfo() {
@@ -32,12 +43,14 @@ export class ProfileContentComponent implements OnInit {
     }
   }
 
-  // fetchUserData() {
-  //   this.userService.getUser(this.UserData.id).subscribe((data) => {
-  //     console.log(this.UserData);
-  //     this.userData = data;
-  //   });
-  // }
+  fetchUserData() {
+    this.userService.getUser(this.UserData.id).subscribe((user: UserResponse) => {
+      console.log(user.user)
+     if(user) {
+       this.userData = user.user;
+     }
+    });
+  }
 
   newTabHandler(): void {
     if (this.createNewTab()) {
@@ -72,6 +85,53 @@ export class ProfileContentComponent implements OnInit {
     this.tabs.push(newTab);
     this.focusOnCreatedTab();
   }
+
+  showAboutForm() {
+    this.showAbout = true;
+    this.displayAbout = false;
+    this.form = this.fb.group({
+      about: [this.userData.about, Validators.compose([Validators.required])],
+    });
+  }
+
+  hideAboutForm() {
+    this.showAbout = false;
+    this.displayAbout = true;
+    this.form.reset();
+
+  }
+
+  isBtnDisabled() {
+    return this.form.invalid || this.loading;
+  }
+
+  get f() { return this.form.controls; }
+
+
+
+  submitForm() {
+    if (this.form.invalid) {
+      return;
+    }
+    this.loading = true;
+
+    this.userService.updateAbout(this.UserData.id, this.f.about.value).subscribe(
+      successRes => {
+      this.fetchUserData();
+      this.toastr.successToastr('About Added Successfully', null, { maxShown: 1 });
+      this.hideAboutForm();
+        this.changeDetectorRefs.detectChanges();
+      },
+      errorRes => {
+        this.loading = false;
+      },
+      () => {
+        this.loading = false;
+      }
+    );
+    return false;
+  }
+
 
   removeTab(index: number) {
     this.tabs.splice(index, 1);
