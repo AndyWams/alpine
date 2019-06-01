@@ -18,7 +18,7 @@ import {
 })
 export class LoginComponent implements OnInit {
   loading = false;
-  errorMsg;
+  errorMsg: any;
   user = {};
   data;
   hide = true;
@@ -64,13 +64,13 @@ export class LoginComponent implements OnInit {
 
     this.authenticationService.login(this.f.email.value, this.f.password.value)
       .subscribe(
-        data => {
+        () => {
           this.toastr.successToastr('Login Authenticated', null, { maxShown: 1 });
           this.form.reset();
           this.router.navigate([this.returnUrl || `/profile`]);
         },
-        error => {
-          this.errorMsg = error.error.message;
+        () => {
+          this.errorMsg = 'Invalid username or password';
           this.loading = false;
         });
   }

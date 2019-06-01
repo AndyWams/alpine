@@ -24,7 +24,7 @@
                           <span>About <i class="fas fa-plus-circle" style="font-size: 80%; cursor: pointer;"
                               (click)="showAboutForm()"></i></span>
                         </div>
-                        <div *ngIf="showAbout">
+                        <div *ngIf="showAbout && userData">
                           <form (ngSubmit)="submitForm()">
                             <mat-form-field class="example-full-width">
                               <textarea matInput [formControl]="form.controls['about']"></textarea>
