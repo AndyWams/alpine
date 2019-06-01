@@ -16,7 +16,7 @@ router.get('/users', (req, res) => {
     });
 });
 
-router.get('/user/:id', (req, res) => {
+router.get('/user/:id', checkauth, (req, res) => {
     Users.findById(req.params.id, (err, user) => {
         res.header("Cache-Control", "no-cache, no-store, must-revalidate");
         if (err)
@@ -95,14 +95,14 @@ router.post('/auth/login', (req, res, next) => {
     .exec()
     .then(user => {
         if(user.length < 1 ) {
-            return res.status(401).send({
+            return res.status(400).send({
                 error: 'Invalid email or password',
                 message: 'Invalid email or password'
             });
         }
         bcrypt.compare(password, user[0].password,  (err, result) => {
             if (err) {
-                return res.status(401).send({
+                return res.status(400).send({
                     error: 'Invalid email or password',
                     message: 'Invalid email or password' });
             }
@@ -134,7 +134,7 @@ router.post('/auth/login', (req, res, next) => {
                 });
                
             } 
-            return res.status(401).send({
+            return res.status(400).send({
                 error: 'Invalid email or password',
                 message: 'Invalid email or password'
             });
@@ -169,11 +169,11 @@ router.put('/profile/:id', (req, res) => {
 
 router.put('/about/:id', (req, res) => {
     Users.findById(req.params.id, (err, user) => {
+        res.header("Cache-Control", "no-cache, no-store, must-revalidate");
         if (!user)
             res.status(400).send({ 'message': err });
         else {
             user.about = req.body.about;
-            res.header("Cache-Control", "no-cache, no-store, must-revalidate");
             user.save().then(user => {
 
                 return res.status(200).send({ success: "About Created Successfully", user });

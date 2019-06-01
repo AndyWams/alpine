@@ -23,7 +23,8 @@ export class ErrorInterceptor implements HttpInterceptor {
                     this.router.navigate(['/accounts/login']);
                     break;
                 case 400:
-                    return throwError(this.getValidationError(err.error.data ? err.error.data : err.error.error));
+                    return throwError(this.getValidationError(err.error.data ? err.error.data : err.error.error ? 
+                        err.error.error.message : err.error.error.message));
                 case 409:
                     return throwError(err.error.data ? err.error.data.error : err.error);
                 default:

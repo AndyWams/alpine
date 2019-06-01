@@ -22,7 +22,7 @@ export class ProfileContentComponent implements OnInit {
   userAbouts;
   loading = false;
   displayAbout = true;
-  USerID;
+  UserID;
   selected = new FormControl(0);
  @Input() UserData;
   constructor(
@@ -32,7 +32,7 @@ export class ProfileContentComponent implements OnInit {
     private changeDetectorRefs: ChangeDetectorRef) {}
 
   ngOnInit() {
-    this.USerID = this.UserData.id;
+    this.UserID = this.UserData.id;
     this.fetchUserData();
     this.getUserInfo();
   }
@@ -50,7 +50,6 @@ export class ProfileContentComponent implements OnInit {
       if (userdata) {
        this.userData = userdata.user;
      }
-     console.log(this.userData);
     });
   }
 
@@ -118,12 +117,12 @@ export class ProfileContentComponent implements OnInit {
     }
     this.loading = true;
     const about = this.f.about.value;
-    this.userService.updateAbout(this.USerID, about).subscribe(
+    this.userService.updateAbout(this.UserID, about).subscribe(
       () => {
+      this.changeDetectorRefs.detectChanges();
       this.fetchUserData();
       this.toastr.successToastr('About Added Successfully', null, { maxShown: 1 });
       this.hideAboutForm();
-      this.changeDetectorRefs.markForCheck();
       },
       () => {
         this.loading = false;
