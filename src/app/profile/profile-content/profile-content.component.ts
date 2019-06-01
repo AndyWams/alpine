@@ -22,6 +22,7 @@ export class ProfileContentComponent implements OnInit {
   userAbouts;
   loading = false;
   displayAbout = true;
+  USerID;
   selected = new FormControl(0);
  @Input() UserData;
   constructor(
@@ -31,6 +32,7 @@ export class ProfileContentComponent implements OnInit {
     private changeDetectorRefs: ChangeDetectorRef) {}
 
   ngOnInit() {
+    this.USerID = this.UserData.id;
     this.fetchUserData();
     this.getUserInfo();
   }
@@ -44,10 +46,11 @@ export class ProfileContentComponent implements OnInit {
   }
 
   fetchUserData() {
-    this.userService.getUser(this.UserData.id).subscribe((user: UserResponse) => {
-     if(user) {
-       this.userData = user.user;
+    this.userService.getUser(this.UserData.id).subscribe((userdata: UserResponse) => {
+      if (userdata) {
+       this.userData = userdata.user;
      }
+     console.log(this.userData);
     });
   }
 
@@ -97,6 +100,7 @@ export class ProfileContentComponent implements OnInit {
     this.showAbout = false;
     this.displayAbout = true;
     this.form.reset();
+    this.fetchUserData();
 
   }
 
@@ -113,14 +117,15 @@ export class ProfileContentComponent implements OnInit {
       return;
     }
     this.loading = true;
-
-    this.userService.updateAbout(this.UserData.id, this.f.about.value).subscribe(
-      successRes => {
+    const about = this.f.about.value;
+    this.userService.updateAbout(this.USerID, about).subscribe(
+      () => {
       this.fetchUserData();
       this.toastr.successToastr('About Added Successfully', null, { maxShown: 1 });
       this.hideAboutForm();
+      this.changeDetectorRefs.markForCheck();
       },
-      errorRes => {
+      () => {
         this.loading = false;
       },
       () => {
