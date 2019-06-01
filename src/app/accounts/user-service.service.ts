@@ -17,7 +17,7 @@ export class UserServiceService {
     return this._http.get(`${environment.userUrl}/users`);
   }
 
-  getUser(id) {
+  getUser(id: string) {
     return this._http.get(`${environment.userUrl}/user/${id}`);
   }
 
@@ -35,9 +35,7 @@ export class UserServiceService {
     {
       about
     })
-    .pipe(map(response => {
-      return response;
-    }));
+    .pipe();
   }
 
   updateUser(id: string, username: string, email: string, password: string) {
