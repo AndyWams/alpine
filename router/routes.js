@@ -18,10 +18,11 @@ router.get('/users', (req, res) => {
 
 router.get('/user/:id', (req, res) => {
     Users.findById(req.params.id, (err, user) => {
+        res.header("Cache-Control", "no-cache, no-store, must-revalidate");
         if (err)
             return res.send({ 'message': err });
         else
-
+        
             return res.status(200).send({ success: "Success", user });
     })
 });
@@ -172,6 +173,7 @@ router.put('/about/:id', (req, res) => {
             res.status(400).send({ 'message': err });
         else {
             user.about = req.body.about;
+            res.header("Cache-Control", "no-cache, no-store, must-revalidate");
             user.save().then(user => {
 
                 return res.status(200).send({ success: "About Created Successfully", user });
@@ -199,35 +201,5 @@ router.put('/skills/:id', (req, res) => {
         }
     });
 });
-
-router.get('/user/skills/:id', (req, res) => {
-    Users.findById(req.params.id, (err, user) => {
-        if (err)
-            res.json({ 'message': err });
-        else
-            res.json(user);
-    })
-});
-
-
-
-// router.get('/profiles', (req, res) => {
-//     Profile.find((err, profiles) => {
-//         if (err)
-//             res.send(err);
-//         else
-//             res.status(200).send(profiles);
-//     });
-// });
-
-// router.get('/profile/:userid/:id', (req, res) => {
-//     Profile.findById(req.params.id, (err, profile) => {
-//         if (err)
-//             res.json({ 'message': err });
-//         else
-//             res.json(profile);
-//     })
-// });
-
 
 export default router;
