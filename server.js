@@ -26,7 +26,7 @@ connection.once('open', () => {
 connection.on('error', function (err) {
     console.log(err);
 });
-
+app.disable('etag');
 app.use('/', appRoute);
 app.use(express.static(__dirname + '/dist/alpine'));
 
